@@ -32,9 +32,9 @@ For a detailed list of changes and version history, please refer to the [CHANGEL
 
 ## Installation
 
-(1) No installation necessary.  Just be sure that new Java ".java" files to 
+1. No installation necessary.  Just be sure that new Java ".java" files to 
 test are located in the "/tests" subdirectory.
-(2) 2 drivers are provided (SQLite, PostgreSQL) but these can easily be
+2. 2 drivers are provided (SQLite, PostgreSQL) but these can easily be
 replaced if desired.
 
 ## Javadocs
