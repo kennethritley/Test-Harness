@@ -3,10 +3,10 @@
 This is a Java application used to test other Java classes.  It uses
 Java "reflection" and it works like this:
 
-(1) It looks into the folder "/tests" to see if it can find Java .java files
-(2) It prints a list of these files
-(3) The user can select a file
-(4) This application will compile that file then execute the "testDB" method
+1. It looks into the folder "/tests" to see if it can find Java .java files
+2. It prints a list of these files
+3. The user can select a file
+4. This application will compile that file then execute the "testDB" method
 
 ### Benefits for instructors:
 
