@@ -52,8 +52,13 @@ public class TestTemplate_Myname {
 
         // Execute the test
         System.out.println("\n--------------------");
+        System.out.println("Executing scrolling cursor test");
+        scrollingCursorTest( url, username, password);
+
+        // Execute the test
+        System.out.println("\n--------------------");
         System.out.println("Executing test1");
-        test1( url, username, password);
+        test2( url, username, password);
 
         // Execute the test
         System.out.println("\n--------------------");
@@ -215,18 +220,86 @@ public static void testPostgresShowMetadata( String url, String username, String
 
 
  /******************************************************************************
- * You can use this for JDBC tests.  This example uses try-with-resources
- * e.g. try (...) {}. Within the parenthesis you can create your connection
- * object. Java will automatically guarantee that this will be closed when
- * you exit the try block, without you needing to explicity close the connection
- * e.g. Java will do this for you. It is a way to handle the connection well
- * but keep your code clean!*   
+ * This method is a nice test of how you can move a cursor in a record set
+ * forwards and backwards!  Why do you want to do this?  Maybe you have a GUI
+ * and you need data in both directions when the user scrolls up or down?
+ * This method also creates the table and inserts some dummy data!
+ * 
+ * @author (your name here)
+ * @version 1.0
+ * @since (your date here)
+ */
+public static void scrollingCursorTest( String url, String username, String password) {
+
+//            // create the objects using a try-with-resources so no explicit "close" is needed
+//            try (Connection conn = DriverManager.getConnection(url, username, password)) {
+//                conn.setAutoCommit(false);
+//
+//                try (Statement stmt = conn.createStatement()) {
+//
+//                    // Create the table
+//                    String createTableQuery = "CREATE TABLE IF NOT EXISTS months (id SERIAL PRIMARY KEY, month VARCHAR(50));";
+//                    stmt.executeUpdate(createTableQuery);
+//
+//                    // Insert rows
+//                    String[] monthsArray = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+//                    for (String month : monthsArray) {
+//                        String insertRowQuery = "INSERT INTO months (month) VALUES ('" + month + "');";
+//                        stmt.executeUpdate(insertRowQuery);
+//                    }
+//
+//                    // Commit the changes
+//                    conn.commit();
+//
+//                } catch (SQLException ex) {
+//                    conn.rollback();
+//                    ex.printStackTrace();
+//                }
+//
+//                // create the objects using a try-with-resources so no explicit "close" is needed
+//                // In order to make the cursor scrollable (top-to-bottom and bottom-to-top)
+//                // you need to use the resultset parameter TYPE_SCROLL_INSENSITIVE
+//                try (Statement stmt = conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
+//                    String query = "SELECT id, month FROM months";
+//                    ResultSet resultSet = stmt.executeQuery(query);
+//
+//                    try (resultSet) {
+//                        System.out.println("Forward:");
+//                        while (resultSet.next()) {
+//                            int id = resultSet.getInt("id");
+//                            String month = resultSet.getString("month");
+//                            System.out.println("ID: " + id + ", Month: " + month);
+//                        }
+//
+//                        System.out.println("Backward:");
+//                        while (resultSet.previous()) {
+//                            int id = resultSet.getInt("id");
+//                            String month = resultSet.getString("month");
+//                            System.out.println("ID: " + id + ", Month: " + month);
+//                        }
+//                    }
+//                } catch (SQLException ex) {
+//                    ex.printStackTrace();
+//                }
+//
+//            } catch (SQLException ex) {
+//                ex.printStackTrace();
+//            }
+
+
+} // End of method
+
+
+/******************************************************************************
+ * You can use this for JDBC tests
+ *   
  * @author (your name here)
  * @version 1.0
  * @since (your date here)
  */
 public static void test1( String url, String username, String password) {
 
+    // try-with-resources
     try (Connection conn = DriverManager.getConnection(url, username, password);) 
     {        
         // add your code here
@@ -328,4 +401,12 @@ public static void test5( String url, String username, String password) {
 
 
 } // End of class
+
+
+
+
+
+
+
+
 
