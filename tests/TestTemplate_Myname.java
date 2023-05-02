@@ -1,4 +1,3 @@
-
 import java.sql.*;
 
 /******************************************************************************
@@ -12,8 +11,11 @@ import java.sql.*;
  */
 public class TestTemplate_Myname {
     public static void main(String[] args) {
-        // Standalone test code here
-        testDB("mytest_database", "mytest_username", "mytest_password");
+        // YOU NEED TO MODIFY THIS FOR YOUR OWN CONNECTION DETAILS!
+        testDB(
+            "jdbc:postgresql://127.0.0.1:5431/postgres", // DB connection URL
+            "postgres", // DB username
+            "kenpostgres"); // DB password
     }
 
 /******************************************************************************
@@ -34,16 +36,44 @@ public class TestTemplate_Myname {
         System.out.println("Password: " + password);
 
         // Test to see if the SQLite driver is installed correctly
-        System.out.println("\nExecuting test: testSQLiteDriver");
+        System.out.println("\n--------------------");
+        System.out.println("Executing test: testSQLiteDriver");
         testSQLiteDriver("jdbc:sqlite::memory");
 
         // Test to see if the SQLite driver is installed correctly
-        System.out.println("\nExecuting test: testPostgresDriver");
+        System.out.println("\n--------------------");
+        System.out.println("Executing test: testPostgresDriver");
         testPostgresSQLDriver( url, username, password);
 
         // Print out some metadata about the database
-        System.out.println("\nExecuting test: testPostgresShowMetadata");
+        System.out.println("\n--------------------");
+        System.out.println("Executing test: testPostgresShowMetadata");
         testPostgresShowMetadata( url, username, password);
+
+        // Execute the test
+        System.out.println("\n--------------------");
+        System.out.println("Executing test1");
+        test1( url, username, password);
+
+        // Execute the test
+        System.out.println("\n--------------------");
+        System.out.println("Executing test2");
+        test2( url, username, password);
+
+        // Execute the test
+        System.out.println("\n--------------------");
+        System.out.println("Executing test3");
+        test3( url, username, password);
+
+        // Execute the test
+        System.out.println("\n--------------------");
+        System.out.println("Executing test4");
+        test4( url, username, password);
+
+        // Execute the test
+        System.out.println("\n--------------------");
+        System.out.println("Executing test5");
+        test5( url, username, password);
 
     } // End of method
 
@@ -70,26 +100,18 @@ public class TestTemplate_Myname {
             return;
         } // End of try
 
-//        try (Connection conn = DriverManager.getConnection(url);
-        try {
+        try (            
             Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement(); 
-
-            // Query the current time
-            ResultSet rs = stmt.executeQuery("SELECT datetime('now')");
-
+            ResultSet rs = stmt.executeQuery("SELECT datetime('now')")
+        )
+        {
             // Display the current time
             if (rs.next()) {
                 System.out.println("Current time: " + rs.getString(1));
             } else {
                 System.out.println("Could not retrieve the current time.");
             }
-
-            // Close the result set, statement, and connection
-            rs.close();
-            stmt.close();
-            conn.close();
-            conn = null; // this is good practice
 
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -192,22 +214,22 @@ public static void testPostgresShowMetadata( String url, String username, String
 } // End of method
 
 
-
-/******************************************************************************
- * You can use this for JDBC tests
- *   
+ /******************************************************************************
+ * You can use this for JDBC tests.  This example uses try-with-resources
+ * e.g. try (...) {}. Within the parenthesis you can create your connection
+ * object. Java will automatically guarantee that this will be closed when
+ * you exit the try block, without you needing to explicity close the connection
+ * e.g. Java will do this for you. It is a way to handle the connection well
+ * but keep your code clean!*   
  * @author (your name here)
  * @version 1.0
  * @since (your date here)
  */
 public static void test1( String url, String username, String password) {
 
-    try {
-        // Connect to the database
-        Connection conn = DriverManager.getConnection(url, username, password);
-        
-        conn.close();
-        conn = null; // this is good practice
+    try (Connection conn = DriverManager.getConnection(url, username, password);) 
+    {        
+        // add your code here
 
     } catch (SQLException ex) {
         ex.printStackTrace();
@@ -225,12 +247,10 @@ public static void test1( String url, String username, String password) {
  */
 public static void test2( String url, String username, String password) {
 
-    try {
-        // Connect to the database
-        Connection conn = DriverManager.getConnection(url, username, password);
-        
-        conn.close();
-        conn = null; // this is good practice
+    // try-with-resources
+    try (Connection conn = DriverManager.getConnection(url, username, password);) 
+    {        
+        // add your code here
 
     } catch (SQLException ex) {
         ex.printStackTrace();
@@ -248,12 +268,10 @@ public static void test2( String url, String username, String password) {
  */
 public static void test3( String url, String username, String password) {
 
-    try {
-        // Connect to the database
-        Connection conn = DriverManager.getConnection(url, username, password);
-        
-        conn.close();
-        conn = null; // this is good practice
+    // try-with-resources
+    try (Connection conn = DriverManager.getConnection(url, username, password);) 
+    {        
+        // add your code here
 
     } catch (SQLException ex) {
         ex.printStackTrace();
@@ -271,12 +289,10 @@ public static void test3( String url, String username, String password) {
  */
 public static void test4( String url, String username, String password) {
 
-    try {
-        // Connect to the database
-        Connection conn = DriverManager.getConnection(url, username, password);
-        
-        conn.close();
-        conn = null; // this is good practice
+    // try-with-resources
+    try (Connection conn = DriverManager.getConnection(url, username, password);) 
+    {        
+        // add your code here
 
     } catch (SQLException ex) {
         ex.printStackTrace();
@@ -286,7 +302,12 @@ public static void test4( String url, String username, String password) {
 
 
 /******************************************************************************
- * You can use this for JDBC tests
+ * You can use this for JDBC tests.  This example uses try-with-resources
+ * e.g. try (...) {}. Within the parenthesis you can create your connection
+ * object. Java will automatically guarantee that this will be closed when
+ * you exit the try block, without you needing to explicity close the connection
+ * e.g. Java will do this for you. It is a way to handle the connection well
+ * but keep your code clean!
  *   
  * @author (your name here)
  * @version 1.0
@@ -294,12 +315,10 @@ public static void test4( String url, String username, String password) {
  */
 public static void test5( String url, String username, String password) {
 
-    try {
-        // Connect to the database
-        Connection conn = DriverManager.getConnection(url, username, password);
-        
-        conn.close();
-        conn = null; // this is good practice
+     // try-with-resources
+     try (Connection conn = DriverManager.getConnection(url, username, password);) 
+    {        
+        // add your code here
 
     } catch (SQLException ex) {
         ex.printStackTrace();
@@ -309,9 +328,4 @@ public static void test5( String url, String username, String password) {
 
 
 } // End of class
-
-
-
-
-
 
