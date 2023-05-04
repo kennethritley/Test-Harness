@@ -16,13 +16,17 @@ import java.util.Scanner;
  */
  public class SQL {
 
-     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException, SecurityException {
-         File dir = new File("./tests/");
-         File[] files = dir.listFiles(new FilenameFilter() {
-             public boolean accept(File dir, String name) {
-                 return name.toLowerCase().endsWith(".java");
-             }
-         });
+    // You have to change these for your own PostgreSQL
+    private static String myURL = "jdbc:postgresql://127.0.0.1:5431/postgres";
+    private static String myUsername = "postgres";
+    private static String myPassword = "kenpostgres";
+    public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException, SecurityException {
+        File dir = new File("./tests/");
+        File[] files = dir.listFiles(new FilenameFilter() {
+            public boolean accept(File dir, String name) {
+                return name.toLowerCase().endsWith(".java");
+            }
+        });
  
         Scanner scanner = new Scanner(System.in);
         while (true) {
@@ -50,7 +54,8 @@ import java.util.Scanner;
                 String className = selectedFile.getName().replace(".java", "");
                 Class<?> testClass = Class.forName(className);
                 Method testMethod = testClass.getDeclaredMethod("testDB", Object.class, Object.class, Object.class);
-                testMethod.invoke(null, "jdbc:postgresql://127.0.0.1:5431/postgres", "postgres", "kenpostgres");
+                testMethod.invoke(null, myURL, myUsername, myPassword);
+                // testMethod.invoke(null, "jdbc:postgresql://127.0.0.1:5431/postgres", "postgres", "kenpostgres");
             } else {
                 System.err.println("No test files found in " + dir.getAbsolutePath());
                 break;

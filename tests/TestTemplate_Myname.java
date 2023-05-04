@@ -10,13 +10,20 @@ import java.sql.*;
  * @since 2023-04-29
  */
 public class TestTemplate_Myname {
+
+    // You have to change these for your own PostgreSQL
+    private static String myURL = "jdbc:postgresql://127.0.0.1:5431/postgres";
+    private static String myUsername = "postgres";
+    private static String myPassword = "kenpostgres";
+
     public static void main(String[] args) {
-        // YOU NEED TO MODIFY THIS FOR YOUR OWN CONNECTION DETAILS!
-        testDB(
-            "jdbc:postgresql://127.0.0.1:5431/postgres", // DB connection URL
-            "postgres", // DB username
-            "kenpostgres"); // DB password
-    }
+         testDB(
+             myURL,       // DB connection URL
+             myUsername,  // DB username
+             myPassword); // DB password    
+        }
+
+
 
 /******************************************************************************
  * This is where you put your JDBC code. Feel free to call other methods.
@@ -83,6 +90,7 @@ public class TestTemplate_Myname {
     } // End of method
 
 
+    
 /******************************************************************************
  * This is a little method that uses the "in memory" version of SQLite
  * and prints out the time.
@@ -196,12 +204,14 @@ public static void testPostgresShowMetadata( String url, String username, String
         DatabaseMetaData meta = conn.getMetaData();
         String dbName = meta.getDatabaseProductName();
         String dbVersion = "*** TO-DO: get the database version ***";
-        String driverName = meta.getDriverName();
-        String driverVersion = "*** TO-DO: get the driver version ***";
+        String dbDriverName = meta.getDriverName();
+        String dbDriverVersion = "*** TO-DO: get the driver version ***";
+        String dbUsername = "*** TO-DO: get the database user name ***";
         System.out.println("DB product: " + dbName);
         System.out.println("DB version: " + dbVersion);
-        System.out.println("Driver name: " + driverName);
-        System.out.println("Driver version: " + driverVersion);
+        System.out.println("Driver name: " + dbDriverName);
+        System.out.println("Driver version: " + dbDriverVersion);
+        System.out.println("Database user name: " + dbUsername);
         
     } catch (SQLException e) {
         System.out.println("Error connecting to the database: " + e.getMessage());
@@ -217,6 +227,7 @@ public static void testPostgresShowMetadata( String url, String username, String
     } // End of try
 
 } // End of method
+
 
 
  /******************************************************************************
